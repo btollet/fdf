@@ -6,14 +6,15 @@
 #    By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/18 13:08:36 by benjamin          #+#    #+#              #
-#    Updated: 2016/12/25 12:52:29 by benjamin         ###   ########.fr        #
+#    Updated: 2017/01/17 03:15:07 by benjamin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 MKEX = cc -o
 SRC = 	fdf.c \
-		draw.c
+		draw.c \
+		get_file.c
 FLAGS = -Wall -Wextra -Werror
 OBJECT = $(SRC:.c=.o)
 COMP = cc -c
@@ -33,11 +34,13 @@ $(OBJECT) :
 
 clean :
 		@/bin/rm -f $(OBJECT)
+		@make clean -C libft/
 		@echo "Object deleted"
 
 
 fclean : clean
 		@/bin/rm -f $(NAME)
+		@make fclean_only -C libft/
 		@echo "Folder cleanup successful"
 
 re : fclean all

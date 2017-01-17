@@ -6,12 +6,14 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 17:13:11 by btollet           #+#    #+#             */
-/*   Updated: 2016/11/18 13:16:31 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/01/17 02:09:58 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+# define BUFF_SIZE 5
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -86,5 +88,6 @@ int					ft_intlen(int i);
 size_t				ft_wordlen(const char *s, char c, int start);
 int					ft_wordcount(const char *s, char c);
 size_t				ft_lstlen(t_list *lst);
+int					get_next_line(const int fd, char **line);
 
 #endif

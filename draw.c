@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/24 17:56:27 by benjamin          #+#    #+#             */
-/*   Updated: 2016/12/27 16:03:06 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/01/17 14:12:52 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,21 @@ void	draw_square(void *mlx, void *win, int *pos)
 	}
 }
 
-void draw_line(void *mlx, void *win, int *pos) 
+void draw_line(void *mlx, void *win, t_point *point1, t_point *point2) 
 {
-	int x1 = pos[0];
-	int y1 = pos[1];
-	int x2 = pos[2];
-	int y2 = pos[3];
+	int x1 = point1->x;
+	int y1 = point1->y - point1->z * 20;
+	int x2 = point2->x;
+	int y2 = point2->y - point2->z * 20;
 
 	int dx,dy,i,xinc,yinc,cumul,x,y ;
+	int color = 0x00FFFFFF;
+	if (point1->z == 10 && point2->z == 10)
+		 color = 0x00FF3300;
+	if ((point1->z == 0 && point2->z == 10) || (point1->z == 10 && point2->z == 0))
+		 color = 0x00FF9933;
+
+	
 	x = x1 ;
 	y = y1 ;
 	dx = x2 - x1 ;
@@ -42,7 +49,7 @@ void draw_line(void *mlx, void *win, int *pos)
 	yinc = ( dy > 0 ) ? 1 : -1 ;
 	dx = abs(dx) ;
 	dy = abs(dy) ;
-	mlx_pixel_put(mlx, win, x, y, 0x00FF0000);
+	mlx_pixel_put(mlx, win, x, y, color);
 	if ( dx > dy )
 	{
 		cumul = dx / 2 ;
@@ -55,7 +62,7 @@ void draw_line(void *mlx, void *win, int *pos)
 				cumul -= dx ;
 				y += yinc ;
 			}
-			mlx_pixel_put(mlx, win, x, y, 0x00FF0000);
+			mlx_pixel_put(mlx, win, x, y, color);
 		}
 	}
 	else
@@ -70,7 +77,7 @@ void draw_line(void *mlx, void *win, int *pos)
 				cumul -= dy;
 				x += xinc;
 			}
-			mlx_pixel_put(mlx, win, x, y, 0x00FF0000);
+			mlx_pixel_put(mlx, win, x, y, color);
 		}
 	}
 }
