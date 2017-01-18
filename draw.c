@@ -26,19 +26,24 @@ void	draw_square(void *mlx, void *win, int *pos)
 	}
 }
 
-void draw_line(void *mlx, void *win, t_point *point1, t_point *point2) 
+void draw_line(t_data *fdf_data, t_point *point1, t_point *point2) 
 {
-	int x1 = point1->x - point1->z * HEIGHT / 4;
+	int x1 = point1->x;
 	int y1 = point1->y - point1->z * HEIGHT;
-	int x2 = point2->x - point2->z * HEIGHT / 4;
+	int x2 = point2->x;
 	int y2 = point2->y - point2->z * HEIGHT;
 
 	int dx,dy,i,xinc,yinc,cumul,x,y ;
 	int color = 0x00FFFFFF;
-	if (point1->z == 10 && point2->z == 10)
+	/*if (point1->z > 0 && point2->z > 10)
 		 color = 0x00FF3300;
-	if ((point1->z == 0 && point2->z == 10) || (point1->z == 10 && point2->z == 0))
+	if ((point1->z == 0 && point2->z > 0) || (point1->z > 0 && point2->z == 0))
 		 color = 0x00FF9933;
+	if ((point1->z == 0 && point2->z < 0) || (point1->z < 0 && point2->z == 0))
+		 color = 0x0000CCFF;
+	if (point1->z < 0 && point2->z < 10)
+		 color = 0x000033FF;*/
+
 
 	
 	x = x1 ;
@@ -49,7 +54,7 @@ void draw_line(void *mlx, void *win, t_point *point1, t_point *point2)
 	yinc = ( dy > 0 ) ? 1 : -1 ;
 	dx = abs(dx) ;
 	dy = abs(dy) ;
-	mlx_pixel_put(mlx, win, x, y, color);
+	mlx_pixel_put(fdf_data->mlx, fdf_data->win, x, y, color);
 	if ( dx > dy )
 	{
 		cumul = dx / 2 ;
@@ -62,7 +67,7 @@ void draw_line(void *mlx, void *win, t_point *point1, t_point *point2)
 				cumul -= dx ;
 				y += yinc ;
 			}
-			mlx_pixel_put(mlx, win, x, y, color);
+			mlx_pixel_put(fdf_data->mlx, fdf_data->win, x, y, color);
 		}
 	}
 	else
@@ -77,7 +82,7 @@ void draw_line(void *mlx, void *win, t_point *point1, t_point *point2)
 				cumul -= dy;
 				x += xinc;
 			}
-			mlx_pixel_put(mlx, win, x, y, color);
+			mlx_pixel_put(fdf_data->mlx, fdf_data->win, x, y, color);
 		}
 	}
 }
