@@ -21,7 +21,7 @@ t_point	*read_file(char *file)
 	t_point	*list_point;
 
 	fd = open(file, O_RDONLY);
-	y = 50;
+	y = 100;
 	list_point = add_point(0, 0, 0, 0);
 	while (1)
 	{
@@ -69,7 +69,7 @@ t_point	*split_to_list(t_point *list_point, char **split, int y)
 		list_point = list_point->next;
 		ID++;
 		x += DIST;
-		y += DIST / 4;
+		//y += DIST / 4;
 		i++;
 	}
 	return (result);

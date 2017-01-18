@@ -14,6 +14,7 @@
 # define FDF_H
 
 # define DIST 20
+# define HEIGHT 10
 
 # include <fcntl.h>
 # include "minilibx_macos/mlx.h"

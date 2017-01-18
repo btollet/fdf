@@ -28,10 +28,10 @@ void	draw_square(void *mlx, void *win, int *pos)
 
 void draw_line(void *mlx, void *win, t_point *point1, t_point *point2) 
 {
-	int x1 = point1->x;
-	int y1 = point1->y - point1->z * 20;
-	int x2 = point2->x;
-	int y2 = point2->y - point2->z * 20;
+	int x1 = point1->x - point1->z * HEIGHT / 4;
+	int y1 = point1->y - point1->z * HEIGHT;
+	int x2 = point2->x - point2->z * HEIGHT / 4;
+	int y2 = point2->y - point2->z * HEIGHT;
 
 	int dx,dy,i,xinc,yinc,cumul,x,y ;
 	int color = 0x00FFFFFF;
