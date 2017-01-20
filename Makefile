@@ -6,15 +6,15 @@
 #    By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/18 13:08:36 by benjamin          #+#    #+#              #
-#    Updated: 2017/01/17 03:15:07 by benjamin         ###   ########.fr        #
+#    Updated: 2017/01/20 09:45:23 by benjamin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 MKEX = cc -o
-SRC = 	fdf.c \
-		draw.c \
-		get_file.c
+SRC = 	fdf.c      init.c \
+		draw.c     get_file.c \
+		error.c
 FLAGS = -Wall -Wextra -Werror
 OBJECT = $(SRC:.c=.o)
 COMP = cc -c

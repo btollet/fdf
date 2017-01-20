@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/24 17:56:53 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/17 14:11:53 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/01/20 09:53:53 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ typedef struct		s_point
 	int				z;
 	int				line_len;
 	int				line_count;
-	int				win_x;
-	int				win_y;
-	int				decal;
 	struct s_point	*next;
 }					t_point;
 
@@ -44,17 +41,21 @@ typedef struct		s_data
 {
 	void			*mlx;
 	void			*win;
+	int				win_x;
+	int				win_y;
+	int				decal;
 }					t_data;
 
 int					main(int nb_ar, char **argv);
 void				draw_square(void *mlx, void *win, int *pos);
-void				draw_line(t_data *data, t_point *point1, t_point *point2, int decal);
-void				v_pixel(t_data *data, t_coord p1, t_coord p2, t_coord inc);
-void				h_pixel(t_data *data, t_coord p1, t_coord p2, t_coord inc);
+void				draw_line(t_data data, t_point *point1, t_point *point2, int decal);
+void				v_pixel(t_data data, t_coord p1, t_coord p2, t_coord inc);
+void				h_pixel(t_data data, t_coord p1, t_coord p2, t_coord inc);
 t_point				*read_file(char *file);
 t_point				*add_point(int id, int x, int y, int z);
 t_point				*split_to_list(t_point *list_point, char **split, int y);
-t_data				*fdf_init();
-t_point				*check_win(t_point *result, t_point *point);
+t_data				fdf_init(t_point *list_point);
+t_data				check_win(t_point *list_point);
+void				error(char *mes);
 
 #endif
