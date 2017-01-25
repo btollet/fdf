@@ -14,8 +14,8 @@
 
 int		ft_wordcount(const char *s, char c)
 {
-	int			result;
-	int			i;
+	int	result;
+	int	i;
 
 	i = 0;
 	result = 0;

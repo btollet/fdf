@@ -14,8 +14,8 @@
 
 char	*ft_strtrim(char const *s)
 {
-	int begin;
-	int end;
+	int		begin;
+	int		end;
 	char	*result;
 
 	if (s)

@@ -14,7 +14,7 @@
 
 size_t	ft_wordlen(const char *s, char c, int start)
 {
-	int			len;
+	int	len;
 
 	len = 0;
 	while (s[start] && s[start] == c)

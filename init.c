@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 09:38:02 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/20 22:41:48 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/01/24 15:40:07 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,22 @@ t_data	check_win(t_point *list_point)
 t_data		fdf_init(t_point *list_point)
 {
 	int		div;
+	int		x_copy;
+	int		y_copy;
 	t_data	fdf_data;
 
 	div = 1;
 	fdf_data = check_win(list_point);
 	fdf_data.mlx = mlx_init();
-	ft_putnbr(fdf_data.win_x);
-	ft_putendl("");
-	ft_putnbr(fdf_data.win_y);
-	fdf_data.win = mlx_new_window(fdf_data.mlx, fdf_data.win_x, fdf_data.win_y, "botllet fdf");
+	x_copy = fdf_data.win_x;
+	y_copy = fdf_data.win_y;
+	while (x_copy >= 1000 || y_copy >= 1000)
+	{
+		div ++;
+		x_copy -= 1000;
+		y_copy -= 1000;
+	}
+	fdf_data.win = mlx_new_window(fdf_data.mlx, fdf_data.win_x / div, fdf_data.win_y / div, "botllet fdf");
+	fdf_data.div = div;
 	return (fdf_data);
 }

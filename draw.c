@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/24 17:56:27 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/20 09:50:43 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/01/22 05:06:42 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,14 @@ void	draw_line(t_data fdf_data, t_point *point1, t_point *point2, int decal)
 	t_coord p2;
 	t_coord p1;
 
-	inc.color = 0x00FFFFFF;
-	if (point1->z > 0 && point2->z > 0)
-		 inc.color = 0x00FF3300;
-	if ((point1->z == 0 && point2->z > 0) || (point1->z > 0 && point2->z == 0))
-		 inc.color = 0x00FF9933;
-	if ((point1->z == 0 && point2->z < 0) || (point1->z < 0 && point2->z == 0))
-		 inc.color = 0x0000CCFF;
-	if (point1->z < 0 && point2->z < 0)
-		 inc.color = 0x000033FF;
-
-	p2.x = point1->x;
-	p2.y = point1->y + decal;
-	p1.x = point2->x - point1->x;
-	p1.y = (point2->y + decal) - (point1->y + decal);
+	if (point1->color > point2 ->color)
+		inc.color = point1->color;
+	else
+		inc.color = point2->color;
+	p2.x = point1->x / fdf_data.div;
+	p2.y = (point1->y + decal) / fdf_data.div;
+	p1.x = (point2->x - point1->x) / fdf_data.div;
+	p1.y = (point2->y + decal) / fdf_data.div - (point1->y + decal) / fdf_data.div;
 	inc.x = (p1.x > 0) ? 1 : -1;
 	inc.y = (p1.y > 0) ? 1 : -1;
 	p1.x = abs(p1.x);

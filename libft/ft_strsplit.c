@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:18:08 by btollet           #+#    #+#             */
-/*   Updated: 2017/01/17 03:53:04 by benjamin         ###   ########.fr       */
+/*   Updated: 2016/11/18 13:02:04 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char			**ft_strsplit(char const *s, char c)
 	start = 0;
 	if (!s)
 		return (NULL);
-	if ((result = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 1))) == NULL)
+	if ((result = (char **)malloc(sizeof(char *) *
+		(ft_wordcount(s, c) + 1))) == NULL)
 		return (NULL);
 	while (s[start] && s[start] == c)
 		start++;
@@ -34,6 +35,6 @@ char			**ft_strsplit(char const *s, char c)
 			start++;
 		i++;
 	}
-	result[i] = NULL;
+	result[i] = 0;
 	return (result);
 }

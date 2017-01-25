@@ -6,14 +6,14 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 17:13:11 by btollet           #+#    #+#             */
-/*   Updated: 2017/01/17 02:09:58 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/01/24 15:08:41 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define BUFF_SIZE 5
+# define BUFF_SIZE 5000
 
 # include <unistd.h>
 # include <stdlib.h>
