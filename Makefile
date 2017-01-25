@@ -6,7 +6,7 @@
 #    By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/18 13:08:36 by benjamin          #+#    #+#              #
-#    Updated: 2017/01/20 09:45:23 by benjamin         ###   ########.fr        #
+#    Updated: 2017/01/25 18:13:35 by benjamin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 MKEX = cc -o
 SRC = 	fdf.c      init.c \
 		draw.c     get_file.c \
-		error.c
+		error.c    free.c
 FLAGS = -Wall -Wextra -Werror
 OBJECT = $(SRC:.c=.o)
 COMP = cc -c

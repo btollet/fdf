@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/24 17:56:53 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/24 16:16:50 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/01/25 18:14:08 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ t_data				check_win(t_point *list_point);
 void				error(char *mes);
 int					get_color(char *split);
 char				*new_init(char *split);
+void				free_split(char **split);
 
 #endif

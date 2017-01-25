@@ -6,12 +6,11 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 01:40:34 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/24 16:18:37 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/01/25 18:48:12 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 t_point	*read_file(char *file)
 {
@@ -78,7 +77,7 @@ char	*new_init(char *split)
 				new[i++] = *split++;
 		}
 		else
-			new = split;
+			new = strdup(split);
 	return (new);
 }
 
@@ -94,17 +93,19 @@ int		get_color(char *split)
 	{
 		split = c + 1;
 		new = new_init(split);
+		c = new;
 		while (*new) 
 		{
         	byte = *new++; 
         	if (byte >= '0' && byte <= '9')
-        		byte = byte - '0';
+        		byte -= '0';
         	else if (byte >= 'a' && byte <='f')
-        		byte = byte - 'a' + 10;
+        		byte -= 'a' + 10;
         	else if (byte >= 'A' && byte <='F')
-        		byte = byte - 'A' + 10;
+        		byte -= 'A' + 10;
         	result = (result << 4) | (byte & 0xF);
     	}
+    	//ft_memdel((void *)&c);
 	}
 	return(result);
 }
@@ -131,6 +132,7 @@ t_point	*split_to_list(t_point *list_point, char **split, int y)
 		x++;
 		i++;
 	}
+	free_split(split);
 	if (result->line_len != 0 && i != result->line_len)
 		error("File error");
 	result->line_len = i;
