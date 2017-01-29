@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 01:40:34 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/25 18:48:12 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/01/29 15:58:03 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ char	*new_init(char *split)
 	if (ft_strlen(split) < 8)
 		{
 			i = 8 - ft_strlen(split);
-			new = (char *)malloc(sizeof(char) * 9);
+			if ((new = (char *)malloc(sizeof(char) * 9)) == NULL)
+				return(NULL);
 			ft_memset(new, '0', 8);
 			while (*split)
 				new[i++] = *split++;
@@ -84,6 +85,7 @@ char	*new_init(char *split)
 int		get_color(char *split)
 {
 	char	*c;
+	int		i;
 	char	*new;
 	int 	result;
 	char	byte;
@@ -91,12 +93,11 @@ int		get_color(char *split)
 	result = 0x00FFFFFF;
 	if ((c = ft_strchr(split, ',')))
 	{
-		split = c + 1;
-		new = new_init(split);
-		c = new;
-		while (*new) 
+		new = new_init(c + 1);
+		i = 0;
+		while (new[i]) 
 		{
-        	byte = *new++; 
+        	byte = new[i++];
         	if (byte >= '0' && byte <= '9')
         		byte -= '0';
         	else if (byte >= 'a' && byte <='f')
@@ -105,7 +106,7 @@ int		get_color(char *split)
         		byte -= 'A' + 10;
         	result = (result << 4) | (byte & 0xF);
     	}
-    	//ft_memdel((void *)&c);
+    	//ft_memdel((void *)&new);
 	}
 	return(result);
 }
@@ -125,11 +126,11 @@ t_point	*split_to_list(t_point *list_point, char **split, int y)
 	id = list_point->id + 1;
 	while (split[i])
 	{
-		list_point->next = add_point(id, x * 20 + y * 10, y * 15
+		list_point->next = add_point(id, (y - x) * 20 / 2, (y + x) * 20 / 2
 			, (split[i]));
 		list_point = list_point->next;
 		id++;
-		x++;
+		x--;
 		i++;
 	}
 	free_split(split);
