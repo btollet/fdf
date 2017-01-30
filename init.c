@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-t_data	check_win(t_point *list_point, t_data fdf_data)
+t_data		check_win(t_point *list_point, t_data fdf_data)
 {
 	int		xy;
 
@@ -55,14 +55,14 @@ t_data		fdf_init(t_point *list_point, t_data fdf_data)
 	fdf_data.div_x = 1;
 	while (copy >= 1500)
 	{
-		fdf_data.div_x ++;
+		fdf_data.div_x++;
 		copy -= 1500;
 	}
 	copy = fdf_data.win_y;
 	fdf_data.div_y = 1;
 	while (copy >= 1000)
 	{
-		fdf_data.div_y ++;
+		fdf_data.div_y++;
 		copy -= 1000;
 	}
 	fdf_data.win = mlx_new_window(fdf_data.mlx, fdf_data.win_x / fdf_data.div_x

@@ -17,3 +17,10 @@ void		error(char *mes)
 	ft_putendl(mes);
 	exit(1);
 }
+
+void		error_free(char *mes, t_point *list_point)
+{
+	free_point(&list_point);
+	ft_putendl(mes);
+	exit(1);
+}

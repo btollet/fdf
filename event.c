@@ -12,14 +12,29 @@
 
 #include "fdf.h"
 
-int		key_press(int key, void *param)
+int		key_press(int key, t_data *fdf_data)
 {
-	param = NULL;
-ft_putnbr(key);
-ft_putendl("");
 	if (key == 53)
 	{
 		exit(1);
 	}
-	return (1);
+	if (key == 124)
+	{
+		if (fdf_data->actual_ar < fdf_data->nb_ar)
+		{
+			mlx_destroy_window(fdf_data->mlx, fdf_data->win);
+			fdf_data->actual_ar++;
+			call_fonc(*fdf_data, fdf_data->argv[fdf_data->actual_ar]);
+		}
+	}
+	if (key == 123)
+	{
+		if (fdf_data->actual_ar > 1)
+		{
+			mlx_destroy_window(fdf_data->mlx, fdf_data->win);
+			fdf_data->actual_ar--;
+			call_fonc(*fdf_data, fdf_data->argv[fdf_data->actual_ar]);
+		}
+	}
+	return (0);
 }

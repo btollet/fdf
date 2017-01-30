@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 12:25:42 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/17 02:26:50 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:22:07 by btollet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char		*ft_strappend(char *file, char *buf)
 {
 	char	*result;
-	
+
 	result = ft_strjoin(file, buf);
 	ft_memdel((void *)&file);
 	return (result);
@@ -34,7 +34,7 @@ int			end_line(char **line, char *file, char **save, int fd)
 		*tmp = 0;
 	*line = ft_strdup(file);
 	if (tmp)
-		 save[fd] = ft_strdup(tmp + 1);
+		save[fd] = ft_strdup(tmp + 1);
 	else
 		save[fd] = NULL;
 	ft_memdel((void *)&file);
@@ -49,7 +49,7 @@ int			get_next_line(const int fd, char **line)
 	char			*file;
 	int				ret;
 
-	if (fd < 0 || fd > 5000 || !line || BUFF_SIZE <= 0)
+	if (fd < 0 || fd > 5000 || BUFF_SIZE <= 0 || !line)
 		return (-1);
 	if (save[fd] != NULL)
 		file = save[fd];
