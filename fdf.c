@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 17:56:12 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/29 14:34:38 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/01/31 14:58:29 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		main(int nb_ar, char **argv)
 {
 	t_data	fdf_data;
 
+	fdf_data.zoom = 1;
 	fdf_data.nb_ar = nb_ar - 1;
 	fdf_data.actual_ar = 1;
 	fdf_data.argv = argv;
@@ -25,7 +26,7 @@ int		main(int nb_ar, char **argv)
 	}
 	else
 	{
-		ft_putendl("No file");
+		ft_putendl("Usage: ./fdf <filename>");
 		return (0);
 	}
 	return (1);
@@ -37,7 +38,7 @@ void	call_fonc(t_data fdf_data, char *argv)
 
 	if (!(list_point = read_file(argv)))
 	{
-		ft_putendl("Error file read");
+		ft_putendl("Error file read.");
 		exit(1);
 	}
 	fdf_data.win_x = 10;
@@ -45,6 +46,11 @@ void	call_fonc(t_data fdf_data, char *argv)
 	fdf_data.decal_y = 0;
 	fdf_data.decal_x = 0;
 	fdf_data = fdf_init(list_point, fdf_data);
+	if (fdf_data.zoom > 1)
+	{
+		fdf_data.decal_x -= (fdf_data.win_x / 2) / fdf_data.zoom;
+		fdf_data.decal_y -= (fdf_data.win_y / 2) / fdf_data.zoom;
+	}
 	set_point(fdf_data, list_point);
 	mlx_key_hook(fdf_data.win, key_press, &fdf_data);
 	mlx_loop(fdf_data.mlx);

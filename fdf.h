@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/24 17:56:53 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/29 14:32:37 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/01/31 15:09:38 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define HEIGHT 10
 
 # include <fcntl.h>
+# include <math.h>
 # include "minilibx_macos/mlx.h"
 # include "libft/libft.h"
 
@@ -24,7 +25,6 @@ typedef struct		s_point
 	int				id;
 	int				x;
 	int				y;
-	int				z;
 	int				line_len;
 	int				line_count;
 	int				color;
@@ -35,6 +35,8 @@ typedef struct		s_coord
 {
 	int				x;
 	int				y;
+	int				div_x;
+	int				div_y;
 	int				color;
 }					t_coord;
 
@@ -48,6 +50,7 @@ typedef struct		s_data
 	int				decal_y;
 	int				div_x;
 	int				div_y;
+	int				zoom;
 	int				nb_ar;
 	int				actual_ar;
 	char			**argv;
@@ -66,10 +69,11 @@ t_data				check_win(t_point *list_point, t_data fdf_data);
 void				error(char *mes);
 void				error_free(char *mes, t_point *list_point);
 int					get_color(char *split);
-char				*new_init(char *split);
 void				free_split(char **split);
-void				free_point(t_point **list_point);
+t_point				*free_point(t_point **list_point);
 int					key_press(int key, t_data *fdf_data);
+void				zoom(t_data *fdf_data, int sens);
+void				change_window(t_data *fdf_data, int sens);
 void				set_point(t_data fdf_data, t_point *list_point);
 
 #endif

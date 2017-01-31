@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 01:40:34 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/29 15:58:03 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/01/31 14:57:18 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,13 @@ t_point	*read_file(char *file)
 	{
 		if ((list_point = split_to_list(list_point, ft_strsplit(line, ' ')
 			, y++)) == NULL)
-		{
-			free(list_point);
-			return (NULL);
-		}
+			return (free_point(&list_point));
 	}
 	close(fd);
 	if (list_point->id == 0)
 		list_point->line_count = y - 1;
 	if (ret == -1)
-		return (NULL);
+		return (free_point(&list_point));
 	return (list_point);
 }
 
@@ -58,7 +55,6 @@ t_point	*add_point(int id, int x, int y, char *split)
 	new_point->id = id;
 	new_point->x = x;
 	new_point->y = (y - z);
-	new_point->z = z;
 	new_point->line_len = 0;
 	new_point->line_count = 0;
 	new_point->color = color;
@@ -66,53 +62,30 @@ t_point	*add_point(int id, int x, int y, char *split)
 	return (new_point);
 }
 
-char	*new_init(char *split)
-{
-	char	*new;
-	int		i;
-
-	if (ft_strlen(split) < 8)
-	{
-		i = 8 - ft_strlen(split);
-		if ((new = (char *)malloc(sizeof(char) * 9)) == NULL)
-			return (NULL);
-		ft_memset(new, '0', 8);
-		while (*split)
-			new[i++] = *split++;
-	}
-	else
-		new = strdup(split);
-	return (new);
-}
-
 int		get_color(char *split)
 {
 	char	*c;
 	int		i;
-	char	*new;
+	int		rc;
 	int		result;
 
-	result = 0x00FFFFFF;
+	result = 16777215;
 	if ((c = ft_strchr(split, ',')))
 	{
-		new = new_init(c + 1);
-		
-		i = ft_strlen(new);
-		//new = "00FFFF00";
-		result = 1;
-		while (i > 0)
+		split = c + 1;
+		result = 0;
+		rc = 0;
+		i = ft_strlen(split);
+		while (--i > 0 && split[i] != 'x')
 		{
-			if (new[i] >= 'a' && new[i] <= 'f')
-				result += (new[i] - 'a' + 1) * i;
-			if (new[i] >= 'A' && new[i] <= 'F')
-				result *= (new[i] - 'A' + 1) * i;
-			if (new[i] >= '1' && new[i] <= '9')
-				result *= (new[i] - '0') * i;
-			i--;
+			if (split[i] >= 'a' && split[i] <= 'f')
+				result += (split[i] - 'a' + 10) * (int)pow(16, rc);
+			if (split[i] >= 'A' && split[i] <= 'F')
+				result += (split[i] - 'A' + 10) * (int)pow(16, rc);
+			if (split[i] >= '1' && split[i] <= '9')
+				result += (split[i] - '0') * (int)pow(16, rc);
+			rc++;
 		}
-ft_putnbr(result);
-ft_putendl("");
-		//ft_memdel((void *)&new);
 	}
 	return (result);
 }
@@ -141,7 +114,7 @@ t_point	*split_to_list(t_point *list_point, char **split, int y)
 	}
 	free_split(split);
 	if (result->line_len != 0 && i != result->line_len)
-		error_free("File error", result);
+		error_free("Found wrong line length. Exiting.", result);
 	result->line_len = i;
 	return (result);
 }
