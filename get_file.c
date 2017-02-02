@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 01:40:34 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/31 14:57:18 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/02/02 13:02:23 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_point	*add_point(int id, int x, int y, char *split)
 		color = get_color(split);
 	}
 	if ((new_point = (t_point *)malloc(sizeof(t_point))) == NULL)
-		error("Malloc error");
+		error("Malloc error", NULL);
 	new_point->id = id;
 	new_point->x = x;
 	new_point->y = (y - z);
@@ -69,7 +69,7 @@ int		get_color(char *split)
 	int		rc;
 	int		result;
 
-	result = 16777215;
+	result = 0x00FFFFFF;
 	if ((c = ft_strchr(split, ',')))
 	{
 		split = c + 1;
@@ -105,16 +105,14 @@ t_point	*split_to_list(t_point *list_point, char **split, int y)
 	id = list_point->id + 1;
 	while (split[i])
 	{
-		list_point->next = add_point(id, (y - x) * 20 / 2, (y + x) * 20 / 2
-			, (split[i]));
+		list_point->next = add_point(id++, (y - x) * 20 / 2, (y + x) * 20 / 2
+			, (split[i++]));
 		list_point = list_point->next;
-		id++;
 		x--;
-		i++;
 	}
 	free_split(split);
 	if (result->line_len != 0 && i != result->line_len)
-		error_free("Found wrong line length. Exiting.", result);
+		error("Found wrong line length. Exiting.", result);
 	result->line_len = i;
 	return (result);
 }

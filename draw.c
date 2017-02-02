@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/24 17:56:27 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/30 23:16:24 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/02/02 12:12:47 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	set_point(t_data fdf_data, t_point *list_point)
 			draw_line(fdf_data, list_point, tmp);
 		list_point = list_point->next;
 	}
-	free_point(&save);
 }
 
 void	h_pixel(t_data fdf_data, t_coord p1, t_coord p2, t_coord inc)

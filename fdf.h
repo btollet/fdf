@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/24 17:56:53 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/31 15:09:38 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/02/02 13:10:08 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ typedef struct		s_data
 	int				div_x;
 	int				div_y;
 	int				zoom;
-	int				nb_ar;
 	int				actual_ar;
 	char			**argv;
+	t_point			*list_point;
 }					t_data;
 
 int					main(int nb_ar, char **argv);
@@ -66,13 +66,13 @@ t_point				*add_point(int id, int x, int y, char *split);
 t_point				*split_to_list(t_point *list_point, char **split, int y);
 t_data				fdf_init(t_point *list_point, t_data fdf_data);
 t_data				check_win(t_point *list_point, t_data fdf_data);
-void				error(char *mes);
-void				error_free(char *mes, t_point *list_point);
+void				error(char *mes, t_point *list_point);
 int					get_color(char *split);
 void				free_split(char **split);
 t_point				*free_point(t_point **list_point);
 int					key_press(int key, t_data *fdf_data);
 void				zoom(t_data *fdf_data, int sens);
+void				move(t_data *fdf_data, int dir);
 void				change_window(t_data *fdf_data, int sens);
 void				set_point(t_data fdf_data, t_point *list_point);
 
