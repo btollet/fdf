@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 01:40:34 by benjamin          #+#    #+#             */
-/*   Updated: 2017/02/02 13:02:23 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/02/03 14:38:10 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,17 @@ t_point	*read_file(char *file)
 t_point	*add_point(int id, int x, int y, char *split)
 {
 	int		z;
-	int		color;
+	char	*c;
+	char	*color;
 	t_point *new_point;
 
 	z = 0;
-	color = 0x00FFFFFF;
+	color = NULL;
 	if (split)
 	{
 		z = ft_atoi(split) * HEIGHT;
-		color = get_color(split);
+		if ((c = ft_strchr(split, ',')))
+			color = ft_strdup(c + 1);
 	}
 	if ((new_point = (t_point *)malloc(sizeof(t_point))) == NULL)
 		error("Malloc error", NULL);
@@ -60,34 +62,6 @@ t_point	*add_point(int id, int x, int y, char *split)
 	new_point->color = color;
 	new_point->next = NULL;
 	return (new_point);
-}
-
-int		get_color(char *split)
-{
-	char	*c;
-	int		i;
-	int		rc;
-	int		result;
-
-	result = 0x00FFFFFF;
-	if ((c = ft_strchr(split, ',')))
-	{
-		split = c + 1;
-		result = 0;
-		rc = 0;
-		i = ft_strlen(split);
-		while (--i > 0 && split[i] != 'x')
-		{
-			if (split[i] >= 'a' && split[i] <= 'f')
-				result += (split[i] - 'a' + 10) * (int)pow(16, rc);
-			if (split[i] >= 'A' && split[i] <= 'F')
-				result += (split[i] - 'A' + 10) * (int)pow(16, rc);
-			if (split[i] >= '1' && split[i] <= '9')
-				result += (split[i] - '0') * (int)pow(16, rc);
-			rc++;
-		}
-	}
-	return (result);
 }
 
 t_point	*split_to_list(t_point *list_point, char **split, int y)

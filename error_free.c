@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 13:04:53 by benjamin          #+#    #+#             */
-/*   Updated: 2017/02/02 13:05:10 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/02/04 16:36:42 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_point	*free_point(t_point **list_point)
 	while (*list_point)
 	{
 		save = (*list_point)->next;
+		if ((*list_point)->color)
+			ft_memdel((void *)&(*list_point)->color);
 		free(*list_point);
 		*list_point = save;
 	}

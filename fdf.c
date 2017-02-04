@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 17:56:12 by benjamin          #+#    #+#             */
-/*   Updated: 2017/02/02 13:10:20 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/02/03 16:33:11 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		main(int nb_ar, char **argv)
 	t_data	fdf_data;
 
 	fdf_data.list_point = NULL;
-	fdf_data.zoom = 1;
 	fdf_data.actual_ar = 1;
 	fdf_data.argv = argv;
 	if (nb_ar >= 2)
@@ -32,6 +31,7 @@ int		main(int nb_ar, char **argv)
 
 void	call_fonc(t_data fdf_data, char *argv)
 {
+	t_img	img;
 	t_point	*list_point;
 
 	if (!fdf_data.list_point)
@@ -45,8 +45,17 @@ void	call_fonc(t_data fdf_data, char *argv)
 		fdf_data.list_point = list_point;
 	}
 	else
+	{
 		list_point = fdf_data.list_point;
-	set_point(fdf_data, list_point);
+		fdf_data = check_win(list_point, fdf_data);
+	}
+	if (!fdf_data.img)
+	{
+		img = img_init(&fdf_data);
+		set_point(fdf_data, list_point, img);
+	}
+	mlx_put_image_to_window(fdf_data.mlx, fdf_data.win, fdf_data.img,
+				fdf_data.win_decal_x, fdf_data.win_decal_y);
 	mlx_key_hook(fdf_data.win, key_press, &fdf_data);
 	mlx_loop(fdf_data.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 09:38:02 by benjamin          #+#    #+#             */
-/*   Updated: 2017/01/31 14:33:28 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/02/03 16:29:20 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,36 @@ t_data		check_win(t_point *list_point, t_data fdf_data)
 	return (fdf_data);
 }
 
-t_data		fdf_init(t_point *list_point, t_data fdf_data)
+t_data		init_var(t_data fdf_data)
 {
-	int		copy;
-
 	fdf_data.win_x = 10;
 	fdf_data.win_y = 10;
 	fdf_data.decal_y = 0;
 	fdf_data.decal_x = 0;
-	fdf_data = check_win(list_point, fdf_data);
-	fdf_data.mlx = mlx_init();
-	copy = fdf_data.win_x;
+	fdf_data.win_decal_y = 0;
+	fdf_data.win_decal_x = 0;
 	fdf_data.div_x = 1;
+	fdf_data.div_y = 1;
+	fdf_data.img = NULL;
+	fdf_data.zoom = 1;
+	
+	fdf_data.mlx = mlx_init();
+	return (fdf_data);
+}
+
+t_data		fdf_init(t_point *list_point, t_data fdf_data)
+{
+	int		copy;
+
+	fdf_data = init_var(fdf_data);
+	fdf_data = check_win(list_point, fdf_data);
+	copy = fdf_data.win_x;
 	while (copy >= 1500)
 	{
 		fdf_data.div_x++;
 		copy -= 1500;
 	}
 	copy = fdf_data.win_y;
-	fdf_data.div_y = 1;
 	while (copy >= 1000)
 	{
 		fdf_data.div_y++;
@@ -68,4 +79,17 @@ t_data		fdf_init(t_point *list_point, t_data fdf_data)
 	fdf_data.win = mlx_new_window(fdf_data.mlx, fdf_data.win_x / fdf_data.div_x
 		, fdf_data.win_y / fdf_data.div_y, "botllet fdf");
 	return (fdf_data);
+}
+
+t_img		img_init(t_data *fdf_data)
+{
+	t_img	img;
+
+	img.bit_per_p = 0;
+	img.len = 0;
+	img.endian = 0;
+	fdf_data->img = mlx_new_image(fdf_data->mlx , (fdf_data->win_x / fdf_data->div_x) * fdf_data->zoom
+		, (fdf_data->win_y / fdf_data->div_y) * fdf_data->zoom);
+	img.img_pixel = mlx_get_data_addr(fdf_data->img, &img.bit_per_p, &img.len, &img.endian);
+	return (img);
 }
