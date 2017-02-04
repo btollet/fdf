@@ -53,7 +53,6 @@ t_data		init_var(t_data fdf_data)
 	fdf_data.div_y = 1;
 	fdf_data.img = NULL;
 	fdf_data.zoom = 1;
-	
 	fdf_data.mlx = mlx_init();
 	return (fdf_data);
 }
@@ -84,12 +83,15 @@ t_data		fdf_init(t_point *list_point, t_data fdf_data)
 t_img		img_init(t_data *fdf_data)
 {
 	t_img	img;
+	int		div;
 
+	div = fdf_data->win_x / fdf_data->div_x;
 	img.bit_per_p = 0;
 	img.len = 0;
 	img.endian = 0;
-	fdf_data->img = mlx_new_image(fdf_data->mlx , (fdf_data->win_x / fdf_data->div_x) * fdf_data->zoom
-		, (fdf_data->win_y / fdf_data->div_y) * fdf_data->zoom);
-	img.img_pixel = mlx_get_data_addr(fdf_data->img, &img.bit_per_p, &img.len, &img.endian);
+	fdf_data->img = mlx_new_image(fdf_data->mlx, div * fdf_data->zoom,
+		(fdf_data->win_y / fdf_data->div_y) * fdf_data->zoom);
+	img.img_pixel = mlx_get_data_addr(fdf_data->img, &img.bit_per_p,
+		&img.len, &img.endian);
 	return (img);
 }

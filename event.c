@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>			
 
 int		key_press(int key, t_data *fdf_data)
 {
@@ -70,7 +69,6 @@ void	zoom(t_data *fdf_data, int key)
 			fdf_data->zoom--;
 			fdf_data->win_decal_x += (fdf_data->win_x / 2) / fdf_data->zoom;
 			fdf_data->win_decal_y += (fdf_data->win_y / 2) / fdf_data->zoom;
-			
 		}
 		call_fonc(*fdf_data, fdf_data->argv[fdf_data->actual_ar]);
 	}
@@ -92,9 +90,7 @@ void	move(t_data *fdf_data, int key)
 		fdf_data->win_decal_y = 0;
 		if (fdf_data->zoom == 2)
 		{
-printf("%d\n", fdf_data->win_x);
 			fdf_data->win_decal_x -= (fdf_data->win_x / 2);
-printf("%d\n", fdf_data->win_decal_x);
 			fdf_data->win_decal_y -= (fdf_data->win_y / 2);
 		}
 	}

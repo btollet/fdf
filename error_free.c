@@ -20,7 +20,7 @@ void		error(char *mes, t_point *list_point)
 	exit(1);
 }
 
-void	free_split(char **split)
+void		free_split(char **split)
 {
 	int i;
 
@@ -33,7 +33,7 @@ void	free_split(char **split)
 	ft_memdel((void **)split);
 }
 
-t_point	*free_point(t_point **list_point)
+t_point		*free_point(t_point **list_point)
 {
 	t_point	*save;
 
@@ -46,5 +46,5 @@ t_point	*free_point(t_point **list_point)
 		*list_point = save;
 	}
 	*list_point = NULL;
-	return(NULL);
+	return (NULL);
 }

@@ -69,7 +69,8 @@ typedef struct		s_data
 
 int					main(int nb_ar, char **argv);
 void				call_fonc(t_data fdf_data, char *argv);
-void				draw_line(t_data data, t_point *point1, t_point *point2, t_img img);
+void				draw_line(t_data data, t_point *point1,
+	t_point *point2, t_img img);
 void				v_pixel(t_coord p1, t_coord p2, t_coord inc, t_img img);
 void				h_pixel(t_coord p1, t_coord p2, t_coord inc, t_img img);
 t_point				*read_file(char *file);
@@ -80,7 +81,7 @@ t_data				init_var(t_data fdf_data);
 t_img				img_init(t_data *fdf_data);
 t_data				check_win(t_point *list_point, t_data fdf_data);
 void				error(char *mes, t_point *list_point);
-void				init_color(t_coord *inc ,t_point *p1, t_point *p2);
+void				init_color(t_coord *inc, t_point *p1, t_point *p2);
 int					get_color(char *color, int rgb);
 void				free_split(char **split);
 t_point				*free_point(t_point **list_point);

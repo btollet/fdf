@@ -12,9 +12,10 @@
 
 #include "fdf.h"
 
-void	init_color(t_coord *inc ,t_point *p1, t_point *p2)
+void	init_color(t_coord *inc, t_point *p1, t_point *p2)
 {
-	char *color;
+	char	*color;
+	int		len;
 
 	if (!p1->color && !p2->color)
 	{
@@ -22,22 +23,20 @@ void	init_color(t_coord *inc ,t_point *p1, t_point *p2)
 		inc->color[1] = 255;
 		inc->color[2] = 255;
 	}
-	else 
+	else
 	{
 		if (!p1->color)
 			color = p2->color;
 		else if (!p2->color)
 			color = p1->color;
+		else if (ft_strcmp(p1->color, p2->color) > 0)
+			color = p1->color;
 		else
-		{
-			if (ft_strcmp(p1->color, p2->color) > 0)
-				color = p1->color;
-			else
-				color = p2->color;
-		}
-		inc->color[0] = get_color(color, 1);
-		inc->color[1] = get_color(color, 2);
-		inc->color[2] = get_color(color, 3);
+			color = p2->color;
+		len = ft_strlen(color);
+		inc->color[0] = get_color(color, len - 1);
+		inc->color[1] = get_color(color, len - 3);
+		inc->color[2] = get_color(color, len - 5);
 	}
 }
 
@@ -46,15 +45,10 @@ int		get_color(char *color, int rgb)
 	int			result;
 	int			rc;
 	int			i;
-	
+
 	if (!color)
 		return (result = 255);
-	if (rgb == 1)
-		i = ft_strlen(color) - 1;
-	if (rgb == 2)
-		i = ft_strlen(color) - 3;
-	if (rgb == 3)
-		i = ft_strlen(color) - 5;
+	i = rgb;
 	if (i < 0)
 		return (result = 0);
 	result = 0;
