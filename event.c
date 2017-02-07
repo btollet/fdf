@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 11:31:57 by benjamin          #+#    #+#             */
-/*   Updated: 2017/02/04 16:59:08 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/02/07 11:54:16 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ void	zoom(t_data *fdf_data, int key)
 		fdf_data->img = NULL;
 		if (key == 24)
 		{
-			fdf_data->win_decal_x -= (fdf_data->win_x / 2) / fdf_data->zoom;
-			fdf_data->win_decal_y -= (fdf_data->win_y / 2) / fdf_data->zoom;
+			fdf_data->win_decal_x -= ((fdf_data->win_x / fdf_data->div_x) / 2) / fdf_data->zoom;
+			fdf_data->win_decal_y -= ((fdf_data->win_y / fdf_data->div_y) / 2) / fdf_data->zoom;
 			fdf_data->zoom++;
 		}
 		else
 		{
 			fdf_data->zoom--;
-			fdf_data->win_decal_x += (fdf_data->win_x / 2) / fdf_data->zoom;
-			fdf_data->win_decal_y += (fdf_data->win_y / 2) / fdf_data->zoom;
+			fdf_data->win_decal_x += ((fdf_data->win_x / fdf_data->div_x) / 2) / fdf_data->zoom;
+			fdf_data->win_decal_y += ((fdf_data->win_y / fdf_data->div_y) / 2) / fdf_data->zoom;
 		}
 		call_fonc(*fdf_data, fdf_data->argv[fdf_data->actual_ar]);
 	}
@@ -90,8 +90,8 @@ void	move(t_data *fdf_data, int key)
 		fdf_data->win_decal_y = 0;
 		if (fdf_data->zoom == 2)
 		{
-			fdf_data->win_decal_x -= (fdf_data->win_x / 2);
-			fdf_data->win_decal_y -= (fdf_data->win_y / 2);
+			fdf_data->win_decal_x -= (fdf_data->win_x / fdf_data->div_x) / 2;
+			fdf_data->win_decal_y -= (fdf_data->win_y / fdf_data->div_y) / 2;
 		}
 	}
 	mlx_clear_window(fdf_data->mlx, fdf_data->win);

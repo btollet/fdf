@@ -6,7 +6,7 @@
 /*   By: benjamin <benjamin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 17:56:12 by benjamin          #+#    #+#             */
-/*   Updated: 2017/02/03 16:33:11 by benjamin         ###   ########.fr       */
+/*   Updated: 2017/02/07 12:06:18 by benjamin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@ int		main(int nb_ar, char **argv)
 	fdf_data.actual_ar = 1;
 	fdf_data.argv = argv;
 	if (nb_ar >= 2)
+	{
+		ft_putendl("FDF:");
+		ft_putendl("- W/A/S/D = Deplacement");
+		ft_putendl("- +/- = Zoom");
+		ft_putendl("- <-/-> = Map precedente/suivante");
+		ft_putendl("- C = Centrer map");
 		call_fonc(fdf_data, argv[1]);
+	}
 	else
 	{
 		ft_putendl("Usage: ./fdf <filename>");
