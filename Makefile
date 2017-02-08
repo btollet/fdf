@@ -24,13 +24,12 @@ NAME = fdf
 all : $(NAME)
 
 $(NAME) : $(OBJECT)
-		@$(MKEX) $(NAME) $(OBJECT) -L minilibx_macos/ -lmlx -framework OpenGL -framework AppKit -L libft/ -lft
+		@$(MKEX) $(NAME) $(OBJECT) -lmlx -framework OpenGL -framework AppKit -L libft/ -lft
 		@echo "FDF compile"
 
 $(OBJECT) :
 		@make -C libft/
-		@make -C minilibx_macos/
-		@$(COMP) $(SRC) $(FLAGS) -I./ -I minilibx_macos/ -I libft/
+		@$(COMP) $(SRC) $(FLAGS) -I./ -I libft/
 		@echo "Compilation of C files succesful"
 
 clean :

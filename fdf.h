@@ -17,7 +17,7 @@
 
 # include <fcntl.h>
 # include <math.h>
-# include "minilibx_macos/mlx.h"
+# include <mlx.h>
 # include "libft/libft.h"
 
 typedef struct		s_point

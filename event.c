@@ -25,7 +25,7 @@ int		key_press(int key, t_data *fdf_data)
 		change_window(fdf_data, 1);
 	if (key == 123)
 		change_window(fdf_data, 2);
-	if (key == 24 || key == 27)
+	if (key == 24 || key == 27 || key == 69 || key == 78)
 		zoom(fdf_data, key);
 	if (key == 0 || key == 2 || key == 1 || key == 13 || key == 8)
 		move(fdf_data, key);
@@ -52,13 +52,13 @@ void	change_window(t_data *fdf_data, int sens)
 
 void	zoom(t_data *fdf_data, int key)
 {
-	if ((key == 24 && fdf_data->zoom == 1)
-		|| (key == 27 && fdf_data->zoom >= 2))
+	if (((key == 24 || key == 69) && fdf_data->zoom == 1)
+		|| ((key == 27 || key == 78) && fdf_data->zoom >= 2))
 	{
 		mlx_clear_window(fdf_data->mlx, fdf_data->win);
 		mlx_destroy_image(fdf_data->mlx, fdf_data->img);
 		fdf_data->img = NULL;
-		if (key == 24)
+		if (key == 24 || key == 69)
 		{
 			fdf_data->win_decal_x -= ((fdf_data->win_x / fdf_data->div_x) / 2) / fdf_data->zoom;
 			fdf_data->win_decal_y -= ((fdf_data->win_y / fdf_data->div_y) / 2) / fdf_data->zoom;
